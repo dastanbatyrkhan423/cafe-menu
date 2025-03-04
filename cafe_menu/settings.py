@@ -83,9 +83,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': 'dastan123',  # В продакшене используйте переменные окружения
+        'PASSWORD': 'dastan123',
         'HOST': 'db.yzgabucsbymchpazkssq.supabase.co',
         'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+        }
     }
 }
 
@@ -126,9 +129,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Добавляем папку static в корне проекта
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
-]
+] if not DEBUG else []
 
 # Media files
 MEDIA_URL = '/media/'
@@ -139,5 +144,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Whitenoise для статических файлов
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Настройка Whitenoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'  # Меняем на более простой storage
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_ROOT = os.path.join(BASE_DIR, 'static')

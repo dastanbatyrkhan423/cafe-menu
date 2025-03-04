@@ -2,9 +2,12 @@
     "version": 2,
     "builds": [
         {
-            "src": "cafe_menu/wsgi.py",
+            "src": "vercel_app.py",
             "use": "@vercel/python",
-            "config": { "maxLambdaSize": "15mb" }
+            "config": { 
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.9"
+            }
         },
         {
             "src": "build_files.sh",
@@ -29,7 +32,11 @@
         },
         {
             "src": "/(.*)",
-            "dest": "cafe_menu/wsgi.py"
+            "dest": "vercel_app.py"
         }
-    ]
+    ],
+    "env": {
+        "DJANGO_SETTINGS_MODULE": "cafe_menu.settings",
+        "PYTHONPATH": "/var/task"
+    }
 } 
