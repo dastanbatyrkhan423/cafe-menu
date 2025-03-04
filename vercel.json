@@ -37,6 +37,12 @@
     ],
     "env": {
         "DJANGO_SETTINGS_MODULE": "cafe_menu.settings",
-        "PYTHONPATH": "/var/task"
+        "PYTHONPATH": "/var/task",
+        "DEBUG": "False",
+        "POSTGRES_DATABASE": "postgres",
+        "POSTGRES_USER": "postgres",
+        "POSTGRES_PASSWORD": "dastan123",
+        "POSTGRES_HOST": "db.yzgabucsbymchpazkssq.supabase.co",
+        "POSTGRES_PORT": "5432"
     }
 } 

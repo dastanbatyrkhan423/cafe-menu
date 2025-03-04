@@ -22,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#rr-163$(q2gm^125v-b)-1aecja7zmx!vkw*6jm!drc*@c+5g'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-#rr-163$(q2gm^125v-b)-1aecja7zmx!vkw*6jm!drc*@c+5g')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1', '*']
 
@@ -80,12 +80,15 @@ WSGI_APPLICATION = 'cafe_menu.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    } if DEBUG else {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'dastan123',
-        'HOST': 'db.yzgabucsbymchpazkssq.supabase.co',
-        'PORT': '5432',
+        'NAME': os.environ.get('POSTGRES_DATABASE', 'postgres'),
+        'USER': os.environ.get('POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'dastan123'),
+        'HOST': os.environ.get('POSTGRES_HOST', 'db.yzgabucsbymchpazkssq.supabase.co'),
+        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
         'OPTIONS': {
             'sslmode': 'require',
         }
