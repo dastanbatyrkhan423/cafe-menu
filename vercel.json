@@ -9,6 +9,14 @@
             "dest": "/static/$1"
         },
         {
+            "src": "/media/(.*)",
+            "dest": "/media/$1"
+        },
+        {
+            "src": "/favicon.ico",
+            "dest": "/static/favicon.ico"
+        },
+        {
             "src": "/(.*)",
             "dest": "cafe_menu/wsgi.py"
         }
