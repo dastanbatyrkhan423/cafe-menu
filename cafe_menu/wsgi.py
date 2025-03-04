@@ -8,9 +8,14 @@ https://docs.djangoproject.com/en/5.1/howto/deployment/wsgi/
 """
 
 import os
+import sys
 
-from django.core.wsgi import get_wsgi_application
+# Add your project directory to the sys.path
+project_home = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if project_home not in sys.path:
+    sys.path.append(project_home)
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cafe_menu.settings')
 
-application = get_wsgi_application()
+from django.core.wsgi import get_wsgi_application
+app = get_wsgi_application()
