@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+    <script src="/static/js/cart.js" defer></script>
+    <style>
+        .centered-dish-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 20px 0;
+            text-align: center;
+          }
+          
+          .large-dish-image {
+            width: 390px;       /* Fixed width */
+            height: 400px;      /* Fixed height */
+            object-fit: cover;  /* This maintains aspect ratio while filling the space */
+            border-radius: 8px;
+            margin-bottom: 20px;
+          }
+          
+          .centered-dish-info {
+            width: 600px;       /* Same width as the image */
+            max-width: 100%;    /* For responsive behavior */
+          }
+          
+          .dish-description {
+            margin-bottom: 15px;
+            line-height: 1.5;
+          }
+          
+          .dish-price {
+            font-weight: bold;
+            font-size: 18px;
+          }
+          
+          .back-to-menu-button {
+            display: inline-block;
+            background-color: #ff9800;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 25px;
+            transition: background-color 0.3s ease;
+          }
+          
+          .back-to-menu-button:hover {
+            background-color: #f57c00;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          }
+    </style>
+</head>
+<body>
+    
+
+    <div class="centered-dish-container">
+        {% if dish.image %}
+            <img class="large-dish-image" src="{{ dish.image.url }}" alt="{{ dish.name }}">
+        {% else %}
+            <img class="large-dish-image" src="/static/images/no-image.jpg" alt="Изображение отсутствует">
+        {% endif %}
+        <h1>{{ dish.name }}</h1>
+        <div class="centered-dish-info">
+          <p class="dish-description">{{ dish.description }}</p>
+          <p class="dish-price">Цена: {{ dish.price }}T</p>
+          <a href="{% url 'menu' %}?from_detail=true" class="back-to-menu-button">Назад в меню</a>
+        </div>
+      </div>
+
+</body>
+</html> 

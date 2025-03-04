@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Заказ оформлен</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 40px;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        h2 {
+            color: #ffd700;
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 25px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1em;
+        }
+        
+        h3 {
+            color: #ffd700;
+            text-align: center;
+            font-size: 1.5em;
+            margin: 30px 0 15px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        h3::before, h3::after {
+            content: '';
+            height: 1px;
+            flex-grow: 1;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5));
+            margin: 0 15px;
+        }
+        
+        h3::after {
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.5), transparent);
+        }
+        
+        .checkout-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .checkout-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .item-name {
+            font-weight: 500;
+        }
+        
+        .item-quantity {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9em;
+        }
+        
+        .item-price {
+            color: #ffd700;
+            font-weight: 600;
+        }
+        
+        .checkout-summary {
+            text-align: right;
+            font-size: 1.2em;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .checkout-summary strong {
+            color: #ffd700;
+        }
+        
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background: #ffd700;
+            color: #000;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 250px;
+            margin: 30px auto 0;
+            display: block;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+            background: #fff;
+        }
+        
+        /* Анимация при загрузке */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .container, .success-icon, h2, p, h3, .checkout-item, .back-button {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h2 {
+                font-size: 1.8em;
+            }
+            
+            h3 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✓</div>
+        
+        <p>Для оформления заказа позовите официанта.</p>
+        
+        <h3>Детали заказа</h3>
+        <div id="checkout-items-container">
+            <!-- Здесь будут отображаться товары из корзины с помощью JavaScript -->
+        </div>
+        
+        <div id="checkout-total" class="checkout-summary">
+            <p><strong>Итого: </strong><span id="total-price">0 ₸</span></p>
+        </div>
+        
+        <a href="/menu" class="back-button" onclick="clearCart()">Вернуться к меню</a>
+    </div>
+    
+    <script>
+        function clearCart() {
+            localStorage.removeItem('cart'); // Удаляем корзину
+        }
+
+        function loadCartFromLocalStorage() {
+            const cartData = localStorage.getItem('cart');
+            return cartData ? JSON.parse(cartData) : {};
+        }
+        
+        function displayCheckoutItems() {
+            const cart = loadCartFromLocalStorage();
+            const checkoutItemsContainer = document.getElementById('checkout-items-container');
+            const totalPriceElement = document.getElementById('total-price');
+            
+            if (!checkoutItemsContainer || !totalPriceElement) {
+                console.error("Контейнеры для отображения не найдены");
+                return;
+            }
+            
+            checkoutItemsContainer.innerHTML = '';
+            let totalPrice = 0;
+            
+            for (const id in cart) {
+                const item = cart[id];
+                if (item && item.quantity > 0) {
+                    totalPrice += item.price * item.quantity;
+                    
+                    // Создаем элемент заказа
+                    const checkoutItemDiv = document.createElement('div');
+                    checkoutItemDiv.className = 'checkout-item';
+                    
+                    checkoutItemDiv.innerHTML = `
+                        <div class="item-name">${item.name} <span class="item-quantity">(${item.quantity} шт.)</span></div>
+                        <div class="item-price">${(item.price * item.quantity).toFixed(0)} ₸</div>
+                    `;
+                    
+                    checkoutItemsContainer.appendChild(checkoutItemDiv);
+                }
+            }
+            
+            // Обновляем итоговую сумму
+            totalPriceElement.textContent = `${totalPrice.toFixed(0)} ₸`;
+        }
+        
+        // Вызываем функцию при загрузке страницы
+        document.addEventListener('DOMContentLoaded', displayCheckoutItems);
+    </script>    
+</html>
