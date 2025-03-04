@@ -1,0 +1,12 @@
+{
+    "builds": [{
+        "src": "cafe_menu/wsgi.py",
+        "use": "@vercel/python"
+    }],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "cafe_menu/wsgi.py"
+        }
+    ]
+} 
